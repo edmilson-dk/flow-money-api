@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx ts-node-dev --respawn --pretty --transpile-only src/main/server.ts",
-    "knex:migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-    "knex:migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
-    "knex:migrate:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback"
+    "knex:migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",
+    "knex:migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
