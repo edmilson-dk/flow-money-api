@@ -1,24 +1,24 @@
 //require('dotenv').config();
-const pg = require('pg');
+import pg from 'pg';
 
 pg.defaults.ssl = {
   rejectUnauthorized: false,
 }
 
-module.exports = {
+export default {
   development: {
-    client: process.env.DB_CLIENT,
+    client: "pg",
     connection: {
-      database: process.env.DATABASE,
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      database: "flow_money",
+      user: "dkflowmoney",
+      password: "dkflowmoney123",
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: process.env.MIGRATIONS,
+      directory: "./src/drivers/db/knex/postgres/migrations",
       tableName: "knex_migrations"
     }
   },
