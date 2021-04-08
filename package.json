@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npx ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "dev": "npx ts-node-dev --respawn --pretty --transpile-only src/main/server.ts",
     "knex:migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
     "knex:migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback"
