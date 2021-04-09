@@ -7,7 +7,6 @@ export async function up(knex: Knex): Promise<void> {
         table.decimal('joined').notNullable();
         table.decimal('left').notNullable();
         table.decimal('total').notNullable().unique();
-        table.string('password', 80).notNullable();
 
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
