@@ -1,4 +1,4 @@
-import { TransactionsDTO } from "../dtos/transactions";
+import { TransactionsDomainDTO } from "../../dtos/transactions";
 
 class Transactions {
   public value: number;
@@ -6,7 +6,7 @@ class Transactions {
   public title: string;
   public category: string;
 
-  constructor({ value, isDecrement, title, category }: TransactionsDTO) {
+  constructor({ value, isDecrement, title, category }: TransactionsDomainDTO) {
     this.value = value;
     this.isDecrement = isDecrement,
     this.title = title;
