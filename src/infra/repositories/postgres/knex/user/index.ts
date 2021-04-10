@@ -1,16 +1,16 @@
 import { IUserRepository } from "../../../../../application/repositories/user";
-import { UserDTO } from "../../../../../domain/entities/dtos/user";
+import { UserPersistDTO } from "../../../../../domain/dtos/user";
 import db from "../../../../../drivers/db/knex/postgres";
 
 class UserRepository implements IUserRepository {
-  async add({ id, name, email, password }: UserDTO): Promise<void> {
+  async add({ id, name, email, password }: UserPersistDTO): Promise<void> {
     await db("users")
       .insert({ id, name, email, password });
 
     return;
   }
 
-  async findUserByEmail(email: string): Promise<{} | UserDTO> {
+  async findUserByEmail(email: string): Promise<{} | UserPersistDTO> {
     const row = await db("users")
       .where({ email });
 
