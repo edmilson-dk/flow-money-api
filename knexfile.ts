@@ -1,4 +1,6 @@
-//require('dotenv').config();
+import dotenv from "dotenv";
+dotenv.config();
+
 import pg from 'pg';
 
 pg.defaults.ssl = {
@@ -7,18 +9,18 @@ pg.defaults.ssl = {
 
 export default {
   development: {
-    client: "pg",
+    client: process.env.DB_CLIENT,
     connection: {
-      database: "flow_money",
-      user: "dkflowmoney",
-      password: "dkflowmoney123",
+      database: process.env.DATABASE,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: "./src/drivers/db/knex/postgres/migrations",
+      directory: process.env.MIGRATIONS,
       tableName: "knex_migrations"
     }
   },
