@@ -1,11 +1,11 @@
-import { BalanceDTO } from "../dtos/balance";
+import { BalanceDomainDTO } from "../../dtos/balance";
 
 class Balance {
   public joined: number;
   public left: number;
   public total: number;
 
-  constructor({ joined, left, total }: BalanceDTO) {
+  constructor({ joined, left, total }: BalanceDomainDTO) {
     this.joined = joined;
     this.left = left;
     this.total = total;
