@@ -1,5 +1,5 @@
-import { BalanceDTO } from "../../entities/dtos/balance";
+import { BalancePersistDTO } from "../../dtos/balance";
 
 export interface BalanceUseCases {
-  add: ({ total, joined, left }: BalanceDTO) => Promise<void>;
+  add: ({ total, joined, left }: BalancePersistDTO) => Promise<void>;
 }
