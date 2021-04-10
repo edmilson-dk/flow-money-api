@@ -1,4 +1,4 @@
-import { UserDTO } from "../dtos/user";
+import { UserDomainDTO } from "../../dtos/user";
 
 class User {
   public id: string;
@@ -6,7 +6,7 @@ class User {
   public email: string;
   public password: string;
 
-  constructor({ id, name, email, password }: UserDTO) {
+  constructor({ id, name, email, password }: UserDomainDTO) {
     this.id = id;
     this.name = name;
     this.email = email;
