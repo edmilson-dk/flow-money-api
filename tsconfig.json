@@ -10,7 +10,6 @@
     "experimentalDecorators": true,              
     "skipLibCheck": true,                          
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./src" 
   },
   "lib": ["es6"],
   "include": ["src"],
