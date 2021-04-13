@@ -2,13 +2,11 @@ import  JWT, { VerifyCallback } from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { createJwtData } from "./types";
-
-export function createJWT(data: createJwtData) {
+export function createJWT(email: string, id: string, expires: string) {
   const token = JWT.sign(
-    { email: data.email, id: data.id },
+    { email: email, id: id },
     process.env.SECRET as string, 
-    { expiresIn: data.expires });
+    { expiresIn: expires });
 
   return token;
 }
