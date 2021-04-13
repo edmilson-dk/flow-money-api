@@ -11,7 +11,7 @@ class Id {
   }
 
   static create(id: string): Either<InvalidIdError, Id> {
-    if (!Id.validate(id)) {
+    if (!Id.validate(id) || id.trim().length <= 1) {
       return left(new InvalidIdError(id));
     }
 
