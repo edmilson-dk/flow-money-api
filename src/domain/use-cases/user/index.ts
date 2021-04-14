@@ -1,6 +1,6 @@
-import { UserPersistDTO } from "../../dtos/user";
+import { AddUserResponse } from "../../../application/use-cases/user/responses/add-user-response";
+import { UserDataDTO } from "../../dtos/user";
 
 export interface IUserUseCases {
-  add: ({ id, name, email, password }: UserPersistDTO) => Promise<void>;
-  findUserByEmail: (email: string) => Promise<UserPersistDTO | {}>;
+  add: (data: UserDataDTO) => Promise<AddUserResponse>;
 }
