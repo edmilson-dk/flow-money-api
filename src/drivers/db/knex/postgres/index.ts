@@ -1,4 +1,4 @@
-const environment: string = String(process.env.NODE_ENV) || 'development';
+const environment: string = process.env.NODE_ENV as string || 'development';
 
 import knexfile from "../../../../../knexfile";
 import knex from 'knex';
