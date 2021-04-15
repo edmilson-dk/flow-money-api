@@ -16,6 +16,13 @@ class UserRepository implements IUserRepository {
 
     return row.length > 0 ? true : false;
   }
+
+  async getUser(email: string): Promise<UserPersistDTO> {
+    const row = await db("users")
+      .where({ email });
+
+    return row[0];
+  }
 }
 
 export default UserRepository;
