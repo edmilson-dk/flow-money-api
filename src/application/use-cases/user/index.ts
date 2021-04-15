@@ -10,7 +10,10 @@ import { Either, left, right } from "../../../shared/either";
 import { generateId } from "../../../utils/generateId";
 import { IUserRepository } from "../../repositories/user";
 import { AlredyExistsUserError } from "./errors/exists-user-error";
-import { encryptData } from "../../../utils/hash-bcrypt";
+import { encryptData, isValidHash } from "../../../utils/hash-bcrypt";
+import { GetUserResponse } from "./responses/get-user-response";
+import { NotExistsUserError } from "./errors/not-exists-user-error";
+import { InvalidUserPasswordError } from "./errors/invalid-password";
 
 class UserUseCases implements IUserUseCases {
   private userRepository: IUserRepository;
@@ -46,6 +49,23 @@ class UserUseCases implements IUserUseCases {
     await this.userRepository.add(userData);
 
     return right(userData);
+  }
+
+  async getUser(email: string, password: string): Promise<GetUserResponse> {
+    const existsUser = await this.userRepository.existUserByEmail(email);
+
+    if (!existsUser) {
+      return left(new NotExistsUserError(email));
+    }
+
+    const user = await this.userRepository.getUser(email);
+    const userPassword = user.password;
+
+    if(!(await isValidHash(password, userPassword))) {
+      return left(new InvalidUserPasswordError(password));
+    }
+
+    return right(user);
   }
 }
 
