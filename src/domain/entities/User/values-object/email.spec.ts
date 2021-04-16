@@ -20,7 +20,7 @@ describe("Email validator", () => {
   })
 
   test("Should not accept invalid char - local part (7)", () => {
-    expect(Email.validate("ot violemos@gmail.com")).toBe(false);
+    expect(Email.validate("ed milson@gmail.com")).toBe(false);
   })
 
   test("Should not accept a dot as first char - local part (9)", () => {
