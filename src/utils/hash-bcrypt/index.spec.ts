@@ -13,4 +13,10 @@ describe("Hash bcrypt validator", () => {
     const isValid = await isValidHash(data, hashed);
     expect(isValid).toBe(true);
   });
+
+  test("Should return false if not valid hash compare", async () => {
+    const hashed = await encryptData(data, 5);
+    const isValid = await isValidHash("000", hashed);
+    expect(isValid).toBe(false);
+  });
 });
