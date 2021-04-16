@@ -2,6 +2,7 @@ import request from "supertest";
 
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
+import { UserDTO } from "../../../../domain/dtos/user";
 
 describe("User routes tests", () => {
   const validData = {
@@ -68,5 +69,13 @@ describe("User routes tests", () => {
         email: "emailError",
         password: "000",
       }).expect(401);
+  });
+
+  test("Should return created user account sucess with token data in response", async () => {
+    const { body } = await request(app)
+      .post("/api/register")
+      .send(validData);
+
+    expect(body.token).toBeTruthy();
   });
 });
