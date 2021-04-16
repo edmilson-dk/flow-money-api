@@ -8,4 +8,8 @@ describe("Name validator", () => {
   test("Should not create name with more than 255 characters", () => {
     expect(Name.validate(`e`.repeat(256))).toBe(false);
   });
+
+  test("Should not create name with empty value", () => {
+    expect(Name.validate("")).toBe(false);
+  })
 });
