@@ -38,13 +38,21 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-
   test("Should not return login user success with invalid email", async () => {
     await request(app)
       .post("/api/login")
       .send({
         email: "emailError",
         password: "123456789"
+      }).expect(401);
+  });
+
+  test("Should not return login user success with invalid password", async () => {
+    await request(app)
+      .post("/api/login")
+      .send({
+        email: "test@gmail.com",
+        password: "00000000000"
       }).expect(401);
   });
 });
