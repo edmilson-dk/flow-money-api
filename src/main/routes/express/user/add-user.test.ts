@@ -14,13 +14,13 @@ describe("User routes tests", () => {
     await cleanColumn("users");
   });
 
-  test("Should return created user account sucess", async () => {
+  test("Should return created user account success", async () => {
     await request(app)
       .post("/api/register")
       .send(validData).expect(201);
   });
 
-  test("Should not return created user account sucess if alredy exists user", async () => {
+  test("Should not return created user account success if alredy exists user", async () => {
     await request(app)
       .post("/api/register")
       .send(validData);
@@ -30,7 +30,7 @@ describe("User routes tests", () => {
       .send(validData).expect(401);
   });
 
-  test("Should not return created user account sucess with invalid email", async () => {
+  test("Should not return created user account success with invalid email", async () => {
     await request(app)
       .post("/api/register")
       .send({
@@ -40,7 +40,7 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-  test("Should not return created user account sucess with invalid password", async () => {
+  test("Should not return created user account success with invalid password", async () => {
     await request(app)
       .post("/api/register")
       .send({
@@ -50,7 +50,7 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-  test("Should not return created user account sucess with invalid name", async () => {
+  test("Should not return created user account success with invalid name", async () => {
     await request(app)
       .post("/api/register")
       .send({
@@ -60,7 +60,7 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-  test("Should not return created user account sucess with invalid values", async () => {
+  test("Should not return created user account success with invalid values", async () => {
     await request(app)
       .post("/api/register")
       .send({
@@ -70,7 +70,7 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-  test("Should return created user account sucess with token data in response", async () => {
+  test("Should return created user account success with token data in response", async () => {
     const { body } = await request(app)
       .post("/api/register")
       .send(validData);
@@ -78,7 +78,7 @@ describe("User routes tests", () => {
     expect(body.token).toBeTruthy();
   });
 
-  test("Should not return created user account sucess with token data in response", async () => {
+  test("Should not return created user account success with token data in response", async () => {
     const { body } = await request(app)
       .post("/api/register")
       .send({});
