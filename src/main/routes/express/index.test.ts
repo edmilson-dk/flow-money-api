@@ -40,14 +40,24 @@ describe("User routes tests", () => {
       }).expect(401);
   });
 
-
   test("Should not return created user account sucess with invalid password", async () => {
     await request(app)
       .post("/api/register")
       .send({
         name: "Edmilson",
-        email: "emailError",
+        email: "test@gmail.com",
         password: "12",
+      }).expect(401);
+  });
+
+
+  test("Should not return created user account sucess with invalid name", async () => {
+    await request(app)
+      .post("/api/register")
+      .send({
+        name: "a",
+        email: "test@gmail.com",
+        password: "123456789",
       }).expect(401);
   });
 });
