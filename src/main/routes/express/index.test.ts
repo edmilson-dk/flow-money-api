@@ -17,4 +17,14 @@ describe("User routes tests", () => {
         password: "123456789",
       }).expect(201);
   });
+
+  test("Should not return created user account sucess with invalid email", async () => {
+    await request(app)
+      .post("/api/register")
+      .send({
+        name: "Edmilson",
+        email: "emailError",
+        password: "123456789",
+      }).expect(401);
+  });
 });
