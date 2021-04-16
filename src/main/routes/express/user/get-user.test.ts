@@ -55,4 +55,12 @@ describe("User routes tests", () => {
         password: "00000000000"
       }).expect(401);
   });
+
+  test("Should return login user success with token data in response", async () => {
+    const { body } = await request(app)
+      .post("/api/login")
+      .send(validData);
+
+    expect(body.token).toBeTruthy();
+  });
 });
