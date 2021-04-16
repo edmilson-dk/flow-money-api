@@ -8,7 +8,7 @@ export async function encryptData(data: string, salt: number): Promise<string> {
   return result;
 }
 
-export async function isValidHash(currentHash: string, originalHash: string): Promise<boolean> {
-  const isValid = await bcrypt.compare(currentHash, originalHash);
+export async function isValidHash(currentData: string, originalDataHashed: string): Promise<boolean> {
+  const isValid = await bcrypt.compare(currentData, originalDataHashed);
   return isValid;
 }
