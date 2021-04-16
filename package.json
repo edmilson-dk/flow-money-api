@@ -7,12 +7,12 @@
     "build": "tsc",
     "start": "tsc && node build/src/main/server.js",
     "dev": "npx ts-node-dev --respawn --pretty --transpile-only src/main/server.ts",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "NODE_ENV=test jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:unit": "yarn test --watch -c jest-unit-config.ts",
     "test:integration": "yarn test --watch -c jest-integration-config.ts",
     "knex:migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",
     "knex:migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback --all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

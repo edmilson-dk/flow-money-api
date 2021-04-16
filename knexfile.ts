@@ -24,6 +24,22 @@ export default {
       tableName: "knex_migrations"
     }
   },
+  test: {
+    client: process.env.DB_CLIENT,
+    connection: {
+      database: "db_tests",
+      user: "usertests",
+      password: "tests123",
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: process.env.MIGRATIONS,
+      tableName: "knex_migrations"
+    }
+  },
   production: {
     client: process.env.DB_CLIENT,
     connection: process.env.DATABASE_URL,

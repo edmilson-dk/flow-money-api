@@ -1,11 +1,13 @@
-const environment: string = process.env.NODE_ENV as string || 'development';
+const environment = process.env.NODE_ENV as string || 'development';
 
-import knexfile from "../../../../../knexfile";
+import knexfile from "../../../../../knexfile"
 import knex from 'knex';
 
-const knexConfig = environment === 'development' 
+let knexConfig = environment === 'development' 
   ? knexfile.development 
   : knexfile.production;
+
+knexConfig = environment === 'test' ? knexfile.test : knexConfig;
 
 const db = knex(knexConfig);
 

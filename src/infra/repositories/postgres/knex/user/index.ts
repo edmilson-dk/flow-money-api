@@ -1,5 +1,6 @@
 import { IUserRepository } from "../../../../../application/repositories/user";
 import { UserPersistDTO } from "../../../../../domain/dtos/user";
+import UserMap from "../../../../../domain/dtos/user/user-map";
 import db from "../../../../../drivers/db/knex/postgres";
 
 class UserRepository implements IUserRepository {
@@ -13,7 +14,7 @@ class UserRepository implements IUserRepository {
   async existUserByEmail(email: string): Promise<boolean> {
     const row = await db("users")
       .where({ email });
-
+   
     return row.length > 0 ? true : false;
   }
 
@@ -21,7 +22,7 @@ class UserRepository implements IUserRepository {
     const row = await db("users")
       .where({ email });
 
-    return row[0];
+    return UserMap.toPersist(row[0]);
   }
 }
 
