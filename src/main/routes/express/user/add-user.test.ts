@@ -2,7 +2,6 @@ import request from "supertest";
 
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
-import { UserDTO } from "../../../../domain/dtos/user";
 
 describe("User routes tests", () => {
   const validData = {
@@ -77,5 +76,13 @@ describe("User routes tests", () => {
       .send(validData);
 
     expect(body.token).toBeTruthy();
+  });
+
+  test("Should not return created user account sucess with token data in response", async () => {
+    const { body } = await request(app)
+      .post("/api/register")
+      .send({});
+
+    expect(body.token).toBeFalsy();
   });
 });
