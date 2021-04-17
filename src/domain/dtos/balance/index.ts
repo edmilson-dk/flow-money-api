@@ -1,6 +1,7 @@
 export type BalanceDomainDTO = {
   joined: number;
   left: number;
+  userId: string;
 }
 
 export type BalancePersistDTO = {
