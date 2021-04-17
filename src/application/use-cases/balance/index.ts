@@ -23,7 +23,7 @@ class BalanceUseCases implements IBalanceUseCases {
     }
 
     const balance: Balance = balanceOrError.value;
-    const balanceData = BalanceMap.toPersist({ userId: data.userId, ...balance });
+    const balanceData = BalanceMap.toPersist({ ...balance });
 
     if (await this.balanceRepository.containBalance(data.userId)) {
       await this.balanceRepository.updateBalance(balanceData);
