@@ -3,6 +3,7 @@ export type TransactionsDomainDTO = {
   isDecrement: boolean;
   title: string;
   category: string;
+  userId: string;
 }
 
 export type TransactionsPersistDTO = {
