@@ -22,7 +22,6 @@ class Joined {
   }
 
   static validate(joined: number): boolean {
-    if (typeof joined === "string") return false;
     if (!joined) return false;
     if (joined < 0) return false;
     
