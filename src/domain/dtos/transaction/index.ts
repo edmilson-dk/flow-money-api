@@ -1,4 +1,4 @@
-export type TransactionsDomainDTO = {
+export type TransactionDomainDTO = {
   value: number;
   isDecrement: boolean;
   title: string;
@@ -6,7 +6,7 @@ export type TransactionsDomainDTO = {
   userId: string;
 }
 
-export type TransactionsPersistDTO = {
+export type TransactionPersistDTO = {
   value: number;
   isDecrement: boolean;
   title: string;
@@ -14,7 +14,7 @@ export type TransactionsPersistDTO = {
   userId: string;
 }
 
-export type TransactionsDTO = {
+export type TransactionDTO = {
   value: number;
   title: string;
   category: string;

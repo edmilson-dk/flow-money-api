@@ -1,5 +1,5 @@
 import { Either, left, right } from "../../../shared/either";
-import { TransactionsDomainDTO } from "../../dtos/transactions";
+import { TransactionDomainDTO } from "../../dtos/transaction";
 import { InvalidCategoryError } from "./errors/category-error";
 import { InvalidIsDecrementError } from "./errors/is-decrement-error";
 import { InvalidTitleError } from "./errors/title-error";
@@ -11,7 +11,7 @@ import Title from "./values-object/title";
 import UserId from "./values-object/user-id";
 import Value from "./values-object/value";
 
-class Transactions {
+class Transaction {
   public value: Value;
   public isDecrement: IsDecrement;
   public title: Title;
@@ -26,8 +26,8 @@ class Transactions {
     this.userId = userId;
   }
 
-  static create(data: TransactionsDomainDTO):
-    Either<ValueError | InvalidIsDecrementError | InvalidTitleError | InvalidCategoryError | UserIdError, Transactions>
+  static create(data: TransactionDomainDTO):
+    Either<ValueError | InvalidIsDecrementError | InvalidTitleError | InvalidCategoryError | UserIdError, Transaction>
   {
     const valueOrError: Either<ValueError, Value> = Value.create(data.value);
     const isDecOrError: Either<InvalidIsDecrementError, IsDecrement> = IsDecrement.create(data.isDecrement);
@@ -57,8 +57,8 @@ class Transactions {
     const category: Category = categoryOrError.value;
     const userId: UserId = userIdOrError.value;
 
-    return right(new Transactions(value, isDecrement, title, category, userId));
+    return right(new Transaction(value, isDecrement, title, category, userId));
   }
 }
 
-export default Transactions;
+export default Transaction;
