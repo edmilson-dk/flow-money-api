@@ -26,6 +26,16 @@ class Transaction {
     this.userId = userId;
   }
 
+  getValues() {
+    return {
+      value: this.value.value,
+      isDecrement: this.isDecrement.value,
+      title: this.title.value,
+      category: this.category.value,
+      userId: this.userId.value,
+    }
+  }
+
   static create(data: TransactionDomainDTO):
     Either<ValueError | InvalidIsDecrementError | InvalidTitleError | InvalidCategoryError | UserIdError, Transaction>
   {
