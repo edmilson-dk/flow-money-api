@@ -7,6 +7,7 @@ import { ITransactionUseCases } from "../../../domain/use-cases/transaction";
 import { left, right } from "../../../shared/either";
 import { ITransactionRepository } from "../../repositories/transaction";
 import { GetBalanceResponse } from "../balance/responses/get-balance";
+import { AlredyExistsTransactionError } from "./errors/alredy-exists-transaction";
 import { AddTransactionResponse } from "./responses/add-transaction";
 
 class TransactionUseCases implements ITransactionUseCases {
@@ -28,6 +29,10 @@ class TransactionUseCases implements ITransactionUseCases {
     const transaction: Transaction = transactionOrError.value;
     const balanceData: GetBalanceResponse = await this.balanceUseCases.getBalance(data.userId);
     const isDecrementOrError = TransactionMap.toDecrementBoolean(data.isDecrement);
+
+    if (await this.transactionRepository.existsTransactionByTitle(data.title)) {
+      return left(new AlredyExistsTransactionError(data.title));
+    }
 
     if (isDecrementOrError.isLeft()) {
       return left(isDecrementOrError.value);
