@@ -1,5 +1,5 @@
 import { BaseController } from "../../../adapters/presentation/controllers/baseControler";
-import GetUserController from "../../../adapters/presentation/controllers/user/get-user-controller";
+import { GetUserController } from "../../../adapters/presentation/controllers/user";
 import UserUseCases from "../../../application/use-cases/user";
 import UserRepository from "../../../infra/repositories/postgres/knex/user";
 
