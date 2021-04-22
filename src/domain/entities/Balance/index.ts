@@ -17,7 +17,16 @@ class Balance {
     this.joined = joined;
     this.left = left;
     this.userId = userId;
-    this.total = Number(joined) - Number(left);
+    this.total = Number(joined.value) - Number(left.value);
+  }
+
+  getValues() {
+    return {
+      joined: this.joined.value,
+      left: this.left.value,
+      total: this.total,
+      userId: this.userId.value,
+    }
   }
 
   static create(data: BalanceDomainDTO): Either<JoinedError | LeftValueError, Balance> {
