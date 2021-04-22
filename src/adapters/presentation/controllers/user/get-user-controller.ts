@@ -7,7 +7,7 @@ import UserMap from "../../../../domain/dtos/user/user-map";
 import { BaseController } from "../baseControler";
 import { GetUserResponse } from "../../../../application/use-cases/user/responses/get-user-response";
 
-class GetUserController implements BaseController {
+export class GetUserController implements BaseController {
   private readonly userUseCases: IUserUseCases;
 
   constructor(userUseCases: IUserUseCases) {
@@ -37,5 +37,3 @@ class GetUserController implements BaseController {
     }
   }
 }
-
-export default GetUserController;

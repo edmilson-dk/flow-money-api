@@ -7,7 +7,7 @@ import { createJWT } from "../../../../infra/jwt-token";
 import UserMap from "../../../../domain/dtos/user/user-map";
 import { BaseController } from "../baseControler";
 
-class AddUserController implements BaseController {
+export class AddUserController implements BaseController {
   private readonly userUseCases: IUserUseCases;
 
   constructor(userUseCases: IUserUseCases) {
@@ -37,5 +37,3 @@ class AddUserController implements BaseController {
     }
   }
 }
-
-export default AddUserController;
