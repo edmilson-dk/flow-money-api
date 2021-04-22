@@ -15,6 +15,13 @@ class TransactionRepository implements ITransactionRepository {
 
     return;
   }
+
+  async existsTransactionByTitle(title: string): Promise<boolean> {
+    const row = await db("transactions")
+      .where({ title });
+
+    return row.length > 0 ? true : false;
+  }
 }
 
 export default TransactionRepository;
