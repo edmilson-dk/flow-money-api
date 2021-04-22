@@ -15,7 +15,6 @@ export type BalanceDTO = {
   joined: number;
   left: number;
   total: number;
-  userId: string;
 }
 
 export type BalanceDataDTO = {
