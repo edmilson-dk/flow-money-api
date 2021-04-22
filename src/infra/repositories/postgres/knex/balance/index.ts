@@ -4,7 +4,6 @@ import db from "../../../../../drivers/db/knex/postgres";
 
 class BalanceRepository implements IBalanceRepository {
   async add(data: BalancePersistDTO): Promise<void> {
-    console.log("chamou")
     await db("balances")
       .insert({
         user_id: data.userId,
