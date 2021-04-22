@@ -10,7 +10,7 @@ class Value {
   }
 
   get value(): number {
-    return this.value;
+    return this.valueE;
   }
 
   static create(value: number): Either<ValueError, Value> {
