@@ -6,5 +6,6 @@ import { InvalidTitleError } from "../../../../domain/entities/Transaction/error
 import { UserIdError } from "../../../../domain/entities/Transaction/errors/user-id-error";
 import { ValueError } from "../../../../domain/entities/Transaction/errors/value-error";
 import { Either } from "../../../../shared/either";
+import { AlredyExistsTransactionError } from "../errors/alredy-exists-transaction";
 
-export type AddTransactionResponse = Either<ValueError | InvalidIsDecrementError | InvalidCategoryError | InvalidTitleError | UserIdError, TransactionDataDTO>;
+export type AddTransactionResponse = Either<ValueError | InvalidIsDecrementError | InvalidCategoryError | InvalidTitleError | UserIdError | AlredyExistsTransactionError, TransactionDataDTO>;
