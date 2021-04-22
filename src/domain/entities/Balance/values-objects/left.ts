@@ -21,9 +21,8 @@ class LeftValue {
     return right(new LeftValue(leftValue));
   }
 
-  static validate(joined: number): boolean {
-    if (!joined) return false;
-    if (joined < 0) return false;
+  static validate(leftValue: number): boolean {
+    if (leftValue < 0) return false;
     
     return true;
   }
