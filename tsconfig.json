@@ -10,6 +10,10 @@
     "experimentalDecorators": true,              
     "skipLibCheck": true,                          
     "forceConsistentCasingInFileNames": true,
+    "typeRoots": [
+      "@types",
+      "./node_modules/@types",
+    ]     
   },
   "lib": ["es6"],
   "include": ["src"],
