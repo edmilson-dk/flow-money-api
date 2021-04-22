@@ -22,7 +22,7 @@ class Title {
   }
 
   static validate(title: string): boolean {
-    if (!title || title.trim().length < 5 || title.trim().length > 255) {
+    if (!title || title.trim().length < 2 || title.trim().length > 255) {
       return false;
     }
 
