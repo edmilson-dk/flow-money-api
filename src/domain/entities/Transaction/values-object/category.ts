@@ -22,7 +22,7 @@ class Category {
   }
 
   static validate(category: string): boolean {
-    if (!category || category.trim().length < 5 || category.trim().length > 80) {
+    if (!category || category.trim().length < 1 || category.trim().length > 80) {
       return false;
     }
 
