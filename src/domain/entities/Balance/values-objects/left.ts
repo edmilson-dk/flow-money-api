@@ -23,7 +23,7 @@ class LeftValue {
 
   static validate(leftValue: number): boolean {
     if (leftValue < 0) return false;
-    
+    if (!(leftValue)) return false;
     return true;
   }
 }
