@@ -23,7 +23,7 @@ class UserId {
 
   static validate(userId: string): boolean {
     if (!userId) return false;
-    if (userId.trim().length < 1) return false;
+    if (userId.trim().length < 10) return false;
 
     return true;
   }
