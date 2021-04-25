@@ -20,4 +20,9 @@ describe("Create a balance entity tests", () => {
     const balance = Balance.create({ ...balanceData, left: -10 });
     expect(balance).toEqual(left(new LeftValueError(-10)));
   });
+
+  test("Should not create balance entity with invalid user-id value", () => {
+    const balance = Balance.create({ ...balanceData, userId: "" });
+    expect(balance).toEqual(left(new UserIdError("")));
+  });
 });
