@@ -15,4 +15,9 @@ describe("Create a balance entity tests", () => {
     const balance = Balance.create({ ...balanceData, joined: -10 });
     expect(balance).toEqual(left(new JoinedError(-10)));
   });
+
+  test("Should not create balance entity with invalid left value", () => {
+    const balance = Balance.create({ ...balanceData, left: -10 });
+    expect(balance).toEqual(left(new LeftValueError(-10)));
+  });
 });
