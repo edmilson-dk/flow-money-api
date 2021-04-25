@@ -6,7 +6,7 @@ import { InvalidPasswordError } from "./errors/password-error";
 import { InvalidNameError } from "./errors/name-error";
 import { InvalidIdError } from "./errors/id-error";
 
-describe("Create a user enttiy tests", () => {
+describe("Create a user entity tests", () => {
   const invalidEmail = "invalidEmail";
   const invalidPassword = "12";
   const invalidName = "al";
