@@ -7,4 +7,7 @@ describe("Category value object validator", () => {
   test("Should not create a category longer than 80 characters", () => {
     expect(Category.validate("aa".repeat(81))).toBeFalsy();
   });
+  test("Should not create a category with an empty string", () => {
+    expect(Category.validate("")).toBeFalsy();
+  });
 });
