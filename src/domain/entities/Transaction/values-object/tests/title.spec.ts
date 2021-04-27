@@ -1,4 +1,4 @@
-import Title from "./title";
+import Title from "../title";
 
 describe("Title value object validator", () => {
   test("Should not create a title of less than 3 characters", () => {

@@ -1,4 +1,4 @@
-import Password from "./password";
+import Password from "../password";
 
 describe("Password validator", () => {
   test("Should not create password with minimum 6 characters", () => {

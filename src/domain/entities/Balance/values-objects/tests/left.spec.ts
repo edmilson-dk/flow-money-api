@@ -1,4 +1,4 @@
-import Left from "./left";
+import Left from "../left";
 
 describe("Left value object validator", () => {
   test("Should not create a left object with value negative", () => {
