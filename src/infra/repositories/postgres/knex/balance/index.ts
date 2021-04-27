@@ -1,5 +1,6 @@
 import { IBalanceRepository } from "../../../../../application/repositories/balance";
 import { BalancePersistDTO } from "../../../../../domain/dtos/balance";
+import BalanceMap from "../../../../../domain/dtos/balance/balance-map";
 import db from "../../../../../drivers/db/knex/postgres";
 
 class BalanceRepository implements IBalanceRepository {
@@ -19,7 +20,7 @@ class BalanceRepository implements IBalanceRepository {
     const row = await db("balances")
       .where({ user_id: userId })
     
-    return row[0];
+    return BalanceMap.toPersist(row[0]);
   }
 
   async containBalance(userId: string): Promise<boolean> {
