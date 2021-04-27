@@ -6,15 +6,15 @@ import { UserIdError } from "./errors/user-id-error";
 import { ValueError } from "./errors/value-error";
 import Transaction from "./index";
 
-describe("Create a transaction entity tests", () => {
-  const transactonData = {
-    category: "Test category",
-    isDecrement: false,
-    title: "Test title",
-    userId: "11001010",
-    value: 1200
-  };
+const transactonData = {
+  category: "Test category",
+  isDecrement: false,
+  title: "Test title",
+  userId: "11001010",
+  value: 1200
+};
 
+describe("Create a transaction entity tests", () => {
   test("Should not create an transaction entity with invalid category value", () => {
     const data = Transaction.create({ ...transactonData, category: "" });
     expect(data).toEqual(left(new InvalidCategoryError("")));
