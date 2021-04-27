@@ -22,8 +22,18 @@ describe("Balance repository tests", () => {
   test("Should add an balance data in database", async () => {
     const data = generateData();
     const userId = data.userId;
-    
+
     await balanceRepository.add(data);
+    const stored = await balanceRepository.getBalance(userId);
+
+    expect(BalanceMap.toPersist(stored)).toEqual(data);
+  });
+
+  test("Should get an balance data in database", async () => {
+    const data = generateData();
+    const userId = data.userId;
+    await balanceRepository.add(data);
+
     const stored = await balanceRepository.getBalance(userId);
 
     expect(BalanceMap.toPersist(stored)).toEqual(data);
