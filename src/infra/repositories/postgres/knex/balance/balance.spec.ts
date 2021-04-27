@@ -26,7 +26,7 @@ describe("Balance repository tests", () => {
     await balanceRepository.add(data);
     const stored = await balanceRepository.getBalance(userId);
 
-    expect(BalanceMap.toPersist(stored)).toEqual(data);
+    expect(stored).toEqual(data);
   });
 
   test("Should get an balance data in database", async () => {
@@ -36,7 +36,7 @@ describe("Balance repository tests", () => {
 
     const stored = await balanceRepository.getBalance(userId);
 
-    expect(BalanceMap.toPersist(stored)).toEqual(data);
+    expect(stored).toEqual(data);
   });
 
   test("Should return true if exist balance relation with user-id", async () => {
@@ -68,6 +68,6 @@ describe("Balance repository tests", () => {
 
     const stored = await balanceRepository.getBalance(userId);
 
-    expect(BalanceMap.toPersist(stored)).toEqual(newData);
+    expect(stored).toEqual(newData);
   });
 });
