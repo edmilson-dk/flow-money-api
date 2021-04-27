@@ -38,4 +38,14 @@ describe("Balance repository tests", () => {
 
     expect(BalanceMap.toPersist(stored)).toEqual(data);
   });
+
+  test("Should return true if exist balance relation with user-id", async () => {
+    const data = generateData();
+    const userId = data.userId;
+
+    await balanceRepository.add(data);
+    const exist = await balanceRepository.containBalance(userId);
+
+    expect(exist).toBeTruthy();
+  });
 });
