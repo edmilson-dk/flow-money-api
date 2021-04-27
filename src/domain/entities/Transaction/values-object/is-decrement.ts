@@ -22,7 +22,7 @@ class IsDecrement {
   }
 
   static validate(isDecrement: boolean): boolean {
-    if (!isDecrement) {
+    if (isDecrement === null) {
       return false;
     }
 
