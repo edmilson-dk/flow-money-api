@@ -6,7 +6,7 @@ class BalanceMap {
       joined: Number(data.joined),
       left: Number(data.left),
       total: Number(data.total),
-      userId: data.userId,
+      userId: data.userId || data.user_id,
     };
   }
 
