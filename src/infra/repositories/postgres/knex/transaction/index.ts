@@ -1,5 +1,6 @@
 import { ITransactionRepository } from "../../../../../application/repositories/transaction";
 import { TransactionPersistDTO } from "../../../../../domain/dtos/transaction";
+import TransactionMap from "../../../../../domain/dtos/transaction/transaction-map";
 import db from "../../../../../drivers/db/knex/postgres";
 
 class TransactionRepository implements ITransactionRepository {
@@ -14,6 +15,13 @@ class TransactionRepository implements ITransactionRepository {
       });
 
     return;
+  }
+
+  async getTransaction(userId: string): Promise<TransactionPersistDTO> {
+    const row = await db("transactions")
+      .where({ user_id: userId });
+
+    return TransactionMap.toPersist(row[0]);
   }
 
   async existsTransactionByTitle(title: string): Promise<boolean> {
