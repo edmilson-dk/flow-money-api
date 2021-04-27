@@ -7,4 +7,7 @@ describe("Title value object validator", () => {
   test("Should not create a title longer than 80 characters", () => {
     expect(Title.validate("aa".repeat(81))).toBeFalsy();
   });
+  test("Should not create a title with an empty string", () => {
+    expect(Title.validate("")).toBeFalsy();
+  });
 });
