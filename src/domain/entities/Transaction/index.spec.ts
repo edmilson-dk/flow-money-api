@@ -3,6 +3,7 @@ import { InvalidCategoryError } from "./errors/category-error";
 import { InvalidIsDecrementError } from "./errors/is-decrement-error";
 import { InvalidTitleError } from "./errors/title-error";
 import { UserIdError } from "./errors/user-id-error";
+import { ValueError } from "./errors/value-error";
 import Transaction from "./index";
 
 describe("Create a transaction entity tests", () => {
@@ -29,5 +30,9 @@ describe("Create a transaction entity tests", () => {
   test("Should not create an transaction entity with invalid userId value", () => {
     const data = Transaction.create({ ...transactonData, userId: "" });
     expect(data).toEqual(left(new UserIdError("")));
+  });
+  test("Should not create an transaction entity with invalid 'value' value", () => {
+    const data = Transaction.create({ ...transactonData, value: -10 });
+    expect(data).toEqual(left(new ValueError(-10)));
   });
 });
