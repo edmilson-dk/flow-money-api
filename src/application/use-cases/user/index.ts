@@ -1,4 +1,4 @@
-import { UserDataDTO, UserDomainDTO, UserPersistDTO } from "../../../domain/dtos/user";
+import { UserDataDTO } from "../../../domain/dtos/user";
 import User from "../../../domain/entities/User";
 import { InvalidEmailError } from "../../../domain/entities/User/errors/email-error";
 import { InvalidIdError } from "../../../domain/entities/User/errors/id-error";
