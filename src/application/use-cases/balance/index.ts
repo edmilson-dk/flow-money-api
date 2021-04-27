@@ -43,7 +43,7 @@ class BalanceUseCases implements IBalanceUseCases {
 
     const balance = await this.balanceRepository.getBalance(userId);
 
-    return right(BalanceMap.toPersist(balance));
+    return right(balance);
   }
 }
 
