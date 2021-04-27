@@ -48,4 +48,12 @@ describe("Balance repository tests", () => {
 
     expect(exist).toBeTruthy();
   });
+
+  test("Should return false if not exist balance relation with user-id", async () => {
+    const data = generateData();
+    await balanceRepository.add(data);
+    const exist = await balanceRepository.containBalance("110010");
+
+    expect(exist).toBeFalsy();
+  });
 });
