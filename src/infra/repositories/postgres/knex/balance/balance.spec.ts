@@ -56,4 +56,18 @@ describe("Balance repository tests", () => {
 
     expect(exist).toBeFalsy();
   });
+
+  test("Should update balance column with new data", async () => {
+    const data = generateData(0, 1000);
+    const newData = generateData(0, 2000);
+    const userId = data.userId;
+    newData.userId = userId;
+
+    await balanceRepository.add(data);
+    await balanceRepository.updateBalance(newData);
+
+    const stored = await balanceRepository.getBalance(userId);
+
+    expect(BalanceMap.toPersist(stored)).toEqual(newData);
+  });
 });
