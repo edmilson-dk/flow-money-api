@@ -28,4 +28,14 @@ describe("Transaction repository tests", () => {
 
     expect(stored).toEqual(data);
   });
+
+  test("Should return true if exists an transaction by title", async () => {
+    const data = generateData(generateId());
+    const title = data.title;
+
+    await transactionRepository.add(data);
+    const exists = await transactionRepository.existsTransactionByTitle(title);
+
+    expect(exists).toBeTruthy();
+  });
 });
