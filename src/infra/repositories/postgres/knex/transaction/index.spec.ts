@@ -38,4 +38,13 @@ describe("Transaction repository tests", () => {
 
     expect(exists).toBeTruthy();
   });
+
+  test("Should return false if not exists an transaction by title", async () => {
+    const data = generateData(generateId());
+
+    await transactionRepository.add(data);
+    const exists = await transactionRepository.existsTransactionByTitle("error");
+
+    expect(exists).toBeFalsy();
+  });
 });
