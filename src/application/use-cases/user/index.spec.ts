@@ -40,4 +40,11 @@ describe("User use cases tests", () => {
     expect(user.value).toEqual(new InvalidPasswordError("123"));
     expect(user.isLeft()).toBeTruthy();
   });
+  test("Should not add a user to the database with an existing email in the database", async () => {
+    await userUseCases.add(userData);
+    const user = await userUseCases.add(userData);
+
+    expect(user.value).toEqual(new AlredyExistsUserError(userData.email));
+    expect(user.isLeft()).toBeTruthy();
+  });
 });
