@@ -58,4 +58,10 @@ describe("User use cases tests", () => {
 
     expect(user.isLeft()).toBeTruthy();
   });
+  test("Must not return user data with incorrect password", async () => {
+    await userUseCases.add(userData);
+    const user = await userUseCases.getUser(userData.email, "senhaincorreta");
+
+    expect(user.isLeft()).toBeTruthy();
+  });
 });
