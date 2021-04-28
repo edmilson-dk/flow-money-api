@@ -25,29 +25,31 @@ describe("Transaction use cases tests", () => {
     await cleanColumn("balances");
   });
 
-  test("Should add an transaction", async () => {
-    const data = generateData(generateId());
-    const transaction = await transactionUseCases.add(data);
-    expect(transaction.isRight()).toBeTruthy();
-  });
-  test("Should not add an transaction with invalid category value", async () => {
-    const data = generateData(generateId());
-    const transaction = await transactionUseCases.add({ ...data, category: "" });
-    expect(transaction.isLeft()).toBeTruthy();
-  });
-  test("Should not add an transaction with invalid title value", async () => {
-    const data = generateData(generateId());
-    const transaction = await transactionUseCases.add({ ...data, title: "aa" });
-    expect(transaction.isLeft()).toBeTruthy();
-  });
-  test("Should not add an transaction with invalid 'value' value", async () => {
-    const data = generateData(generateId());
-    const transaction = await transactionUseCases.add({ ...data, value: -10 });
-    expect(transaction.isLeft()).toBeTruthy();
-  });
-  test("Should not add an transaction with invalid is-decrement value", async () => {
-    const data = generateData(generateId());
-    const transaction = await transactionUseCases.add({ ...data, isDecrement: null });
-    expect(transaction.isLeft()).toBeTruthy();
+  describe("Add transaction tests", () => {
+    test("Should add an transaction", async () => {
+      const data = generateData(generateId());
+      const transaction = await transactionUseCases.add(data);
+      expect(transaction.isRight()).toBeTruthy();
+    });
+    test("Should not add an transaction with invalid category value", async () => {
+      const data = generateData(generateId());
+      const transaction = await transactionUseCases.add({ ...data, category: "" });
+      expect(transaction.isLeft()).toBeTruthy();
+    });
+    test("Should not add an transaction with invalid title value", async () => {
+      const data = generateData(generateId());
+      const transaction = await transactionUseCases.add({ ...data, title: "aa" });
+      expect(transaction.isLeft()).toBeTruthy();
+    });
+    test("Should not add an transaction with invalid 'value' value", async () => {
+      const data = generateData(generateId());
+      const transaction = await transactionUseCases.add({ ...data, value: -10 });
+      expect(transaction.isLeft()).toBeTruthy();
+    });
+    test("Should not add an transaction with invalid is-decrement value", async () => {
+      const data = generateData(generateId());
+      const transaction = await transactionUseCases.add({ ...data, isDecrement: null });
+      expect(transaction.isLeft()).toBeTruthy();
+    });
   });
 });
