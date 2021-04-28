@@ -35,4 +35,9 @@ describe("Transaction use cases tests", () => {
     const transaction = await transactionUseCases.add({ ...data, category: "" });
     expect(transaction.isLeft()).toBeTruthy();
   });
+  test("Should not add an transaction with invalid title value", async () => {
+    const data = generateData(generateId());
+    const transaction = await transactionUseCases.add({ ...data, title: "aa" });
+    expect(transaction.isLeft()).toBeTruthy();
+  });
 });
