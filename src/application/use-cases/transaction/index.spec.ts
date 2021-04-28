@@ -40,4 +40,9 @@ describe("Transaction use cases tests", () => {
     const transaction = await transactionUseCases.add({ ...data, title: "aa" });
     expect(transaction.isLeft()).toBeTruthy();
   });
+  test("Should not add an transaction with invalid 'value' value", async () => {
+    const data = generateData(generateId());
+    const transaction = await transactionUseCases.add({ ...data, value: -10 });
+    expect(transaction.isLeft()).toBeTruthy();
+  });
 });
