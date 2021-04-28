@@ -1,7 +1,6 @@
 import UserUseCases from "./index";
 import UserRepository from "../../../infra/repositories/postgres/knex/user";
 import { cleanColumn } from "../../../infra/repositories/postgres/knex/helpers/knex-helpers";
-import { right } from "../../../shared/either";
 import { InvalidEmailError } from "../../../domain/entities/User/errors/email-error";
 import { InvalidNameError } from "../../../domain/entities/User/errors/name-error";
 import { InvalidPasswordError } from "../../../domain/entities/User/errors/password-error";
@@ -46,5 +45,11 @@ describe("User use cases tests", () => {
 
     expect(user.value).toEqual(new AlredyExistsUserError(userData.email));
     expect(user.isLeft()).toBeTruthy();
+  });
+  test("User data must be returned", async () => {
+    await userUseCases.add(userData);
+    const user = await userUseCases.getUser(userData.email, userData.password);
+
+    expect(user.isRight()).toBeTruthy();
   });
 });
