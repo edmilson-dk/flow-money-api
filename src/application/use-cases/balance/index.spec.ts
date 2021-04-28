@@ -29,5 +29,10 @@ describe("Balance use cases tests", () => {
       const balance = await balanceUseCases.add({ ...data, joined: -10 });
       expect(balance.isLeft()).toBeTruthy();
     });
+    test("Should not add balance with invalid left value", async () => {
+      const data = generateData(generateId());
+      const balance = await balanceUseCases.add({ ...data, left: -10 });
+      expect(balance.isLeft()).toBeTruthy();
+    });
   });
 });
