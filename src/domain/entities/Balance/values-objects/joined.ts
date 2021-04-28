@@ -23,7 +23,7 @@ class Joined {
 
   static validate(joined: number): boolean {
     if (joined < 0) return false;
-    if (!(joined)) return false;
+    if (joined === null) return false;
     
     return true;
   }
