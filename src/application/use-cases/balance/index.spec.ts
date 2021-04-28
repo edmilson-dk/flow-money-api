@@ -37,6 +37,13 @@ describe("Balance use cases tests", () => {
   });
 
   describe("Get balance tests", () => {
-   
+    test("Should return balance data", async () => {
+      const data = generateData(generateId());
+      const userId = data.userId;
+      await balanceUseCases.add(data);
+
+      const balance = await balanceUseCases.getBalance(userId);
+      expect(balance.isRight()).toBeTruthy();
+    });
   });
 });
