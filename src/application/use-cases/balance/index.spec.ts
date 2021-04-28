@@ -18,9 +18,16 @@ describe("Balance use cases tests", () => {
     await cleanColumn("balances");
   });
 
-  test("Should add balance in database", async () => {
-    const data = generateData(generateId());
-    const balance = await balanceUseCases.add(data);
-    expect(balance.isRight()).toBeTruthy();
+  describe("Add balance tests", () => {
+    test("Should add balance in database", async () => {
+      const data = generateData(generateId());
+      const balance = await balanceUseCases.add(data);
+      expect(balance.isRight()).toBeTruthy();
+    });
+    test("Should not add balance with invalid joined value", async () => {
+      const data = generateData(generateId());
+      const balance = await balanceUseCases.add({ ...data, joined: -10 });
+      expect(balance.isLeft()).toBeTruthy();
+    });
   });
 });
