@@ -52,4 +52,10 @@ describe("User use cases tests", () => {
 
     expect(user.isRight()).toBeTruthy();
   });
+  test("User data must not be returned with an existing email in the database", async () => {
+    await userUseCases.add(userData);
+    const user = await userUseCases.getUser("emailerror@gmail.com", userData.password);
+
+    expect(user.isLeft()).toBeTruthy();
+  });
 });
