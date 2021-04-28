@@ -20,48 +20,53 @@ describe("User use cases tests", () => {
     await cleanColumn("users");
   }); 
 
-  test("Should add an user in database", async () => {
-    const user = await userUseCases.add(userData);
-    expect(user.isRight()).toBeTruthy();
-  });
-  test("Should not add an user in database with invalid email", async () => {
-    const user = await userUseCases.add({ ...userData, email: "errorEmail"});
-    expect(user.value).toEqual(new InvalidEmailError("errorEmail"));
-    expect(user.isLeft()).toBeTruthy();
-  });
-  test("Should not add an user in database with invalid name", async () => {
-    const user = await userUseCases.add({ ...userData, name: ""});
-    expect(user.value).toEqual(new InvalidNameError(""));
-    expect(user.isLeft()).toBeTruthy();
-  });
-  test("Should not add an user in database with invalid password", async () => {
-    const user = await userUseCases.add({ ...userData, password: "123"});
-    expect(user.value).toEqual(new InvalidPasswordError("123"));
-    expect(user.isLeft()).toBeTruthy();
-  });
-  test("Should not add a user to the database with an existing email in the database", async () => {
-    await userUseCases.add(userData);
-    const user = await userUseCases.add(userData);
+  describe("Add user tests", () => {
+    test("Should add an user in database", async () => {
+      const user = await userUseCases.add(userData);
+      expect(user.isRight()).toBeTruthy();
+    });
+    test("Should not add an user in database with invalid email", async () => {
+      const user = await userUseCases.add({ ...userData, email: "errorEmail"});
+      expect(user.value).toEqual(new InvalidEmailError("errorEmail"));
+      expect(user.isLeft()).toBeTruthy();
+    });
+    test("Should not add an user in database with invalid name", async () => {
+      const user = await userUseCases.add({ ...userData, name: ""});
+      expect(user.value).toEqual(new InvalidNameError(""));
+      expect(user.isLeft()).toBeTruthy();
+    });
+    test("Should not add an user in database with invalid password", async () => {
+      const user = await userUseCases.add({ ...userData, password: "123"});
+      expect(user.value).toEqual(new InvalidPasswordError("123"));
+      expect(user.isLeft()).toBeTruthy();
+    });
+    test("Should not add a user to the database with an existing email in the database", async () => {
+      await userUseCases.add(userData);
+      const user = await userUseCases.add(userData);
 
-    expect(user.value).toEqual(new AlredyExistsUserError(userData.email));
-    expect(user.isLeft()).toBeTruthy();
+      expect(user.value).toEqual(new AlredyExistsUserError(userData.email));
+      expect(user.isLeft()).toBeTruthy();
+    });
   });
-  test("User data must be returned", async () => {
-    await userUseCases.add(userData);
-    const user = await userUseCases.getUser(userData.email, userData.password);
+ 
+  describe("Get user data tests", () => {
+    test("User data must be returned", async () => {
+      await userUseCases.add(userData);
+      const user = await userUseCases.getUser(userData.email, userData.password);
 
-    expect(user.isRight()).toBeTruthy();
-  });
-  test("User data must not be returned with an existing email in the database", async () => {
-    await userUseCases.add(userData);
-    const user = await userUseCases.getUser("emailerror@gmail.com", userData.password);
+      expect(user.isRight()).toBeTruthy();
+    });
+    test("User data must not be returned with an existing email in the database", async () => {
+      await userUseCases.add(userData);
+      const user = await userUseCases.getUser("emailerror@gmail.com", userData.password);
 
-    expect(user.isLeft()).toBeTruthy();
-  });
-  test("Must not return user data with incorrect password", async () => {
-    await userUseCases.add(userData);
-    const user = await userUseCases.getUser(userData.email, "senhaincorreta");
+      expect(user.isLeft()).toBeTruthy();
+    });
+    test("Must not return user data with incorrect password", async () => {
+      await userUseCases.add(userData);
+      const user = await userUseCases.getUser(userData.email, "senhaincorreta");
 
-    expect(user.isLeft()).toBeTruthy();
+      expect(user.isLeft()).toBeTruthy();
+    });
   });
 });
