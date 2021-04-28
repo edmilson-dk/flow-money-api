@@ -28,7 +28,6 @@ describe("Transaction use cases tests", () => {
   test("Should add an transaction", async () => {
     const data = generateData(generateId());
     const transaction = await transactionUseCases.add(data);
-
     expect(transaction.value).toBeTruthy();
   });
 });
