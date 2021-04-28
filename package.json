@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc && node build/src/main/server.js",
     "dev": "npx ts-node-dev --respawn --pretty --transpile-only src/main/server.ts",
-    "test": "NODE_ENV=test jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "NODE_ENV=test jest --passWithNoTests --noStackTrace --runInBand",
     "test:unit": "yarn test --watch -c jest-unit-config.ts",
     "test:integration": "yarn test --watch -c jest-integration-config.ts",
     "knex:migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",

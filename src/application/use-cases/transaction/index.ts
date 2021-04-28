@@ -39,8 +39,9 @@ class TransactionUseCases implements ITransactionUseCases {
     }
 
     const isDecrement = isDecrementOrError.value;
+    
     const transactionData = TransactionMap.toPersist({ ...transaction.getValues(), isDecrement });
-   
+  
     if (balanceData.isLeft()) {
       isDecrement
         ? await this.balanceUseCases.add({ joined: 0, left: transactionData.value, userId: data.userId })
