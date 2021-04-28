@@ -4,6 +4,8 @@ import { cleanColumn } from "../../../infra/repositories/postgres/knex/helpers/k
 import { right } from "../../../shared/either";
 import { InvalidEmailError } from "../../../domain/entities/User/errors/email-error";
 import { InvalidNameError } from "../../../domain/entities/User/errors/name-error";
+import { InvalidPasswordError } from "../../../domain/entities/User/errors/password-error";
+import { AlredyExistsUserError } from "./errors/exists-user-error";
 
 const userData = {
   name: "Alex",
@@ -31,6 +33,11 @@ describe("User use cases tests", () => {
   test("Should not add an user in database with invalid name", async () => {
     const user = await userUseCases.add({ ...userData, name: ""});
     expect(user.value).toEqual(new InvalidNameError(""));
+    expect(user.isLeft()).toBeTruthy();
+  });
+  test("Should not add an user in database with invalid password", async () => {
+    const user = await userUseCases.add({ ...userData, password: "123"});
+    expect(user.value).toEqual(new InvalidPasswordError("123"));
     expect(user.isLeft()).toBeTruthy();
   });
 });
