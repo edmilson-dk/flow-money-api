@@ -35,4 +35,8 @@ describe("Balance use cases tests", () => {
       expect(balance.isLeft()).toBeTruthy();
     });
   });
+
+  describe("Get balance tests", () => {
+   
+  });
 });
