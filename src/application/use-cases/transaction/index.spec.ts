@@ -28,6 +28,11 @@ describe("Transaction use cases tests", () => {
   test("Should add an transaction", async () => {
     const data = generateData(generateId());
     const transaction = await transactionUseCases.add(data);
-    expect(transaction.value).toBeTruthy();
+    expect(transaction.isRight()).toBeTruthy();
+  });
+  test("Should not add an transaction with invalid category value", async () => {
+    const data = generateData(generateId());
+    const transaction = await transactionUseCases.add({ ...data, category: "" });
+    expect(transaction.isLeft()).toBeTruthy();
   });
 });
