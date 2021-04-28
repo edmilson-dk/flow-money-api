@@ -45,5 +45,12 @@ describe("Balance use cases tests", () => {
       const balance = await balanceUseCases.getBalance(userId);
       expect(balance.isRight()).toBeTruthy();
     });
+    test("Should not return balance data with invalid user id", async () => {
+      const data = generateData(generateId());
+      await balanceUseCases.add(data);
+
+      const balance = await balanceUseCases.getBalance("1100");
+      expect(balance.isLeft()).toBeTruthy();
+    });
   });
 });
