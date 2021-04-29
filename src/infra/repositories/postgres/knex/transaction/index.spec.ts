@@ -67,7 +67,7 @@ describe("Transaction repository tests", () => {
     expect(exists).toBeFalsy();
   });
 
-  test("Should return transaction data if deleted witth success", async () => {
+  test("Should return transaction data if deleted with success", async () => {
     const data = generateData(generateId());
 
     await transactionRepository.add(data);
