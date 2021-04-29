@@ -32,12 +32,20 @@ class TransactionRepository implements ITransactionRepository {
     return row.length > 0 ? true : false;
   }
 
-  async dropTransaction(id: string): Promise<void> {
-    await db("transactions")
-      .where({ id })
-      .del();
+  async existsTransactionById(id: string): Promise<boolean> {
+    const row = await db("transactions")
+      .where({ id });
 
-    return;
+    return row.length > 0 ? true : false;
+  }
+
+  async dropTransaction(id: string): Promise<TransactionPersistDTO> {
+    const row = await db("transactions")
+      .where({ id })
+      .del()
+      .returning("*")
+
+    return TransactionMap.toPersist(row[0]);
   }
 }
 
