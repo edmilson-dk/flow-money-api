@@ -66,4 +66,12 @@ describe("Add transaction router tests", () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(401);
   });
+
+  test("Should not return add transaction success with invalid title value", async () => {
+    await request(app)
+      .post("/api/session/create/transaction")
+      .send({ ...transactionData, title: "" })
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(401);
+  });
 });
