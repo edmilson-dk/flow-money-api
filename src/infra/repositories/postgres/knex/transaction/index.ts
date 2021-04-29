@@ -20,7 +20,7 @@ class TransactionRepository implements ITransactionRepository {
 
   async getTransaction(id: string): Promise<TransactionPersistDTO> {
     const row = await db("transactions")
-      .where({ id: id });
+      .where({ id });
 
     return TransactionMap.toPersist(row[0]);
   }
@@ -30,6 +30,14 @@ class TransactionRepository implements ITransactionRepository {
       .where({ title });
 
     return row.length > 0 ? true : false;
+  }
+
+  async dropTransaction(id: string): Promise<void> {
+    await db("transactions")
+      .where({ id })
+      .del();
+
+    return;
   }
 }
 
