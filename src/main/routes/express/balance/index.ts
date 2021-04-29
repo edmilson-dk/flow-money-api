@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { adaptRoute } from "../../../adapters/express-adapter";
-import { makeGetBalanceController } from "../../../factories/balance/get-balance";
+import { makeGetBalanceController } from "../../../factories/balance";
 
 const balanceRoutes = Router();
 
