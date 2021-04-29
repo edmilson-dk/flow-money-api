@@ -66,4 +66,13 @@ describe("Transaction repository tests", () => {
 
     expect(exists).toBeFalsy();
   });
+
+  test("Should return transaction data if deleted witth success", async () => {
+    const data = generateData(generateId());
+
+    await transactionRepository.add(data);
+    const drop = await transactionRepository.dropTransaction(data.id);
+
+    expect(drop).toEqual(data);
+  });
 });
