@@ -9,7 +9,9 @@ import { generateId } from "../../../utils/generateId";
 import { ITransactionRepository } from "../../repositories/transaction";
 import { GetBalanceResponse } from "../balance/responses/get-balance";
 import { AlredyExistsTransactionError } from "./errors/alredy-exists-transaction";
+import { NotExistsTransactionError } from "./errors/not-exists-transaction";
 import { AddTransactionResponse } from "./responses/add-transaction";
+import { DropTransactionResponse } from "./responses/drop-transaction";
 
 class TransactionUseCases implements ITransactionUseCases {
   private readonly transactionRepository: ITransactionRepository;
@@ -65,6 +67,35 @@ class TransactionUseCases implements ITransactionUseCases {
     await this.transactionRepository.add(transactionData);
   
     return right(transactionData);
+  }
+
+  async dropTransaction(id: string): Promise<DropTransactionResponse> {
+    if (!(await this.transactionRepository.existsTransactionById(id))) {
+      return left(new NotExistsTransactionError(id));
+    }
+
+    const deletedTransaction = await this.transactionRepository.dropTransaction(id);
+    const balanceData = await this.balanceUseCases.getBalance(deletedTransaction.userId);
+
+    if (balanceData.isLeft()) {
+      return left(new NotExistsTransactionError(id));
+    }
+
+    if (deletedTransaction.isDecrement) {
+      await this.balanceUseCases.add({ 
+        left: balanceData.value.left - deletedTransaction.value,
+        joined: balanceData.value.joined,
+        userId: deletedTransaction.userId,
+      });
+    } else {
+      await this.balanceUseCases.add({ 
+        left: balanceData.value.left,
+        joined: balanceData.value.joined - deletedTransaction.value,
+        userId: deletedTransaction.userId,
+      });
+    }
+
+    return right(deletedTransaction);
   }
 }
 
