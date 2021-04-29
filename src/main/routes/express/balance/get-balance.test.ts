@@ -46,4 +46,11 @@ describe("Get balance routes tests", () => {
       "total": 1000
     });
   });
+
+  test("Should not return get balande success with empty user token", async () => {
+    await request(app)
+      .get("/api/session/balance")
+      .set('Authorization', `Bearer ''`)
+      .expect(401);
+  });
 });
