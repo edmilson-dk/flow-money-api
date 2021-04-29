@@ -36,4 +36,17 @@ describe("Add transaction router tests", () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(201);
   });
+
+  test("Should not return add transaction success with empty user token", async () => {
+    await request(app)
+      .post("/api/session/create/transaction")
+      .send({
+        category: "Test category",
+        isDecrement: false,
+        value: 1000,
+        title: "Test title",
+      })
+      .set('Authorization', `Bearer ''`)
+      .expect(401);
+  });
 });
