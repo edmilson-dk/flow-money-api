@@ -1,4 +1,4 @@
-import { TransactionDataDTO } from "../../../../domain/dtos/transaction";
+import { TransactionPersistDTO } from "../../../../domain/dtos/transaction";
 import Transaction from "../../../../domain/entities/Transaction";
 import { InvalidCategoryError } from "../../../../domain/entities/Transaction/errors/category-error";
 import { InvalidIsDecrementError } from "../../../../domain/entities/Transaction/errors/is-decrement-error";
@@ -8,4 +8,4 @@ import { ValueError } from "../../../../domain/entities/Transaction/errors/value
 import { Either } from "../../../../shared/either";
 import { AlredyExistsTransactionError } from "../errors/alredy-exists-transaction";
 
-export type AddTransactionResponse = Either<ValueError | InvalidIsDecrementError | InvalidCategoryError | InvalidTitleError | UserIdError | AlredyExistsTransactionError, TransactionDataDTO>;
+export type AddTransactionResponse = Either<ValueError | InvalidIsDecrementError | InvalidCategoryError | InvalidTitleError | UserIdError | AlredyExistsTransactionError, TransactionPersistDTO>;
