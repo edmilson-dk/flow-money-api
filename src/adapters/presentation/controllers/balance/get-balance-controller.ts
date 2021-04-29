@@ -15,7 +15,7 @@ export class GetBalanceController implements BaseController {
   async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const userId = httpRequest.rest.userId;
-
+     
       const getBalanceResponse: GetBalanceResponse = await this.balanceUseCases.getBalance(userId);
 
       if (getBalanceResponse.isLeft()) {

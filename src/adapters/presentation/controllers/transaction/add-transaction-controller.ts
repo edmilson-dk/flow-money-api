@@ -17,8 +17,8 @@ export class AddTransactionController implements BaseController {
     try {
       const { isDecrement, value, category, title } = httpRequest.body;
       const userId = httpRequest.rest.userId;
-
-      if (!isDecrement || !value || !category || !title) {
+    
+      if (isDecrement === null || !value || !category || !title) {
         return badRequest(new MissingParamError(), 401);
       }
 

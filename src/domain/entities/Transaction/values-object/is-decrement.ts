@@ -2,18 +2,18 @@ import { Either, left, right } from "../../../../shared/either";
 import { InvalidIsDecrementError } from "../errors/is-decrement-error";
 
 class IsDecrement {
-  private readonly isDecrement: boolean;
+  private readonly isDecrement: boolean | string;
 
-  constructor(isDecrement: boolean) {
+  constructor(isDecrement: boolean | string) {
     this.isDecrement = isDecrement;
     Object.freeze(this);
   }
 
-  get value(): boolean {
+  get value(): boolean | string {
     return this.isDecrement;
   }
 
-  static create(isDecrement: boolean): Either<InvalidIsDecrementError, IsDecrement> {
+  static create(isDecrement: boolean | string): Either<InvalidIsDecrementError, IsDecrement> {
     if (!IsDecrement.validate(isDecrement)) {
       return left(new InvalidIsDecrementError(isDecrement));
     }
@@ -21,7 +21,7 @@ class IsDecrement {
     return right(new IsDecrement(isDecrement));
   }
 
-  static validate(isDecrement: boolean): boolean {
+  static validate(isDecrement: boolean | string): boolean | string {
     if (isDecrement === null) {
       return false;
     }
