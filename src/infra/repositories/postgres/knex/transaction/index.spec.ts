@@ -57,4 +57,13 @@ describe("Transaction repository tests", () => {
 
     expect(exists).toBeTruthy();
   });
+
+  test("Should return false if not exists an transaction by id", async () => {
+    const data = generateData(generateId());
+
+    await transactionRepository.add(data);
+    const exists = await transactionRepository.existsTransactionById("error");
+
+    expect(exists).toBeFalsy();
+  });
 });
