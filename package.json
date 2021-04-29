@@ -11,8 +11,8 @@
     "test:unit": "yarn test --watch -c jest-unit-config.ts",
     "test:integration": "yarn test --watch -c jest-integration-config.ts",
     "knex:migrate:make": "knex --knexfile knexfile.ts -x ts migrate:make",
-    "knex:migrate:latest": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback --all"
+    "knex:migrate:latest": "NODE_ENV=test knex --knexfile knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "NODE_ENV=test knex --knexfile knexfile.ts migrate:rollback --all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

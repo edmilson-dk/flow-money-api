@@ -24,7 +24,7 @@ class UserUseCases implements IUserUseCases {
 
   async add(data: UserDataDTO): Promise<AddUserResponse> {
     const id = generateId();
-    const userOrError: Either<InvalidNameError | InvalidEmailError | InvalidIdError | InvalidPasswordError, User>  = User.create({ id, ...data });
+    const userOrError = User.create({ id, ...data });
     
     if (userOrError.isLeft()) {
       return left(userOrError.value);

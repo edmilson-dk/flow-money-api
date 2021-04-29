@@ -5,9 +5,9 @@ import BalanceUseCases from "../balance";
 import { cleanColumn } from "../../../infra/repositories/postgres/knex/helpers/knex-helpers";
 import { generateId } from "../../../utils/generateId";
 
-function generateData(id: string) {
+function generateData(userId: string) {
   return {
-    userId: id,
+    userId,
     category: "Test category",
     isDecrement: false,
     value: 1000,
@@ -48,7 +48,7 @@ describe("Transaction use cases tests", () => {
     });
     test("Should not add an transaction with invalid is-decrement value", async () => {
       const data = generateData(generateId());
-      const transaction = await transactionUseCases.add({ ...data, isDecrement: null });
+      const transaction = await transactionUseCases.add({ ...data, isDecrement: "" });
       expect(transaction.isLeft()).toBeTruthy();
     });
   });

@@ -11,7 +11,8 @@ const transactonData = {
   isDecrement: false,
   title: "Test title",
   userId: "11001010",
-  value: 1200
+  value: 1200,
+  id: "1001010",
 };
 
 describe("Create a transaction entity tests", () => {
@@ -20,8 +21,8 @@ describe("Create a transaction entity tests", () => {
     expect(data).toEqual(left(new InvalidCategoryError("")));
   }); 
   test("Should not create an transaction entity with invalid is-decrement value", () => {
-    const data = Transaction.create({ ...transactonData, isDecrement: null });
-    expect(data).toEqual(left(new InvalidIsDecrementError(null)));
+    const data = Transaction.create({ ...transactonData, isDecrement: "" });
+    expect(data).toEqual(left(new InvalidIsDecrementError("")));
   });
   test("Should not create an transaction entity with invalid title value", () => {
     const data = Transaction.create({ ...transactonData, title: "a" });

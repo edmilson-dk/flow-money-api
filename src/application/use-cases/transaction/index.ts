@@ -5,6 +5,7 @@ import Transaction from "../../../domain/entities/Transaction";
 import { IBalanceUseCases } from "../../../domain/use-cases/balance";
 import { ITransactionUseCases } from "../../../domain/use-cases/transaction";
 import { left, right } from "../../../shared/either";
+import { generateId } from "../../../utils/generateId";
 import { ITransactionRepository } from "../../repositories/transaction";
 import { GetBalanceResponse } from "../balance/responses/get-balance";
 import { AlredyExistsTransactionError } from "./errors/alredy-exists-transaction";
@@ -20,8 +21,9 @@ class TransactionUseCases implements ITransactionUseCases {
   }
 
   async add(data: TransactionDataDTO): Promise<AddTransactionResponse> {
-    const transactionOrError = Transaction.create(data);
-
+    const id = generateId();
+    const transactionOrError = Transaction.create({ ...data, id });
+    
     if (transactionOrError.isLeft()) {
       return left(transactionOrError.value);
     }

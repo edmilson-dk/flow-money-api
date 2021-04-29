@@ -9,6 +9,7 @@ function generateData(id) {
     isDecrement: false,
     value: 1000,
     title: "Test title",
+    id: "10101010"
   };
 }
 
@@ -21,11 +22,10 @@ describe("Transaction repository tests", () => {
 
   test("Should add an transaction data in database", async () => {
     const data = generateData(generateId());
-    const userId = data.userId;
 
     await transactionRepository.add(data);
-    const stored = await transactionRepository.getTransaction(userId);
-
+    const stored = await transactionRepository.getTransaction(data.id);
+    
     expect(stored).toEqual(data);
   });
 

@@ -11,15 +11,16 @@ class TransactionRepository implements ITransactionRepository {
         category: data.category,
         title: data.title,
         user_id: data.userId,
-        value: data.value
+        value: data.value,
+        id: data.id,
       });
 
     return;
   }
 
-  async getTransaction(userId: string): Promise<TransactionPersistDTO> {
+  async getTransaction(id: string): Promise<TransactionPersistDTO> {
     const row = await db("transactions")
-      .where({ user_id: userId });
+      .where({ id: id });
 
     return TransactionMap.toPersist(row[0]);
   }

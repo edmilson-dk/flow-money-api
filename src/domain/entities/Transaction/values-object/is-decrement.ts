@@ -22,9 +22,8 @@ class IsDecrement {
   }
 
   static validate(isDecrement: boolean | string): boolean | string {
-    if (isDecrement === null) {
-      return false;
-    }
+    if (isDecrement === null) return false;
+    if (typeof isDecrement === "string" && isDecrement.trim().length <= 0) return false;
 
     return true;
   }

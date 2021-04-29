@@ -9,6 +9,7 @@ class TransactionMap {
       category: data.category,
       title: data.title,
       isDecrement: data.isDecrement,
+      id: data.id,
     };
   }
 
@@ -19,6 +20,7 @@ class TransactionMap {
       title: data.title,
       isDecrement: data.isDecrement ?? data.is_decrement,
       userId: data.userId ?? data.user_id,
+      id: data.id,
     };
   }
 

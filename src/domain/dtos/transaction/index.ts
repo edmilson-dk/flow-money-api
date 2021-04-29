@@ -4,6 +4,7 @@ export type TransactionDomainDTO = {
   title: string;
   category: string;
   userId: string;
+  id: string;
 }
 
 export type TransactionDataDTO = {
@@ -20,6 +21,7 @@ export type TransactionPersistDTO = {
   title: string;
   category: string;
   userId: string;
+  id: string;
 }
 
 export type TransactionDTO = {
@@ -27,4 +29,5 @@ export type TransactionDTO = {
   title: string;
   category: string;
   isDecrement: boolean | string;
+  id: string;
 }
