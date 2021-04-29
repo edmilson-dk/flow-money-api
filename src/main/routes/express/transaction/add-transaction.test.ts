@@ -5,6 +5,12 @@ import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helper
 
 describe("Add transaction router tests", () => {
   let userToken = '';
+  const transactionData = {
+    category: "Test category",
+    isDecrement: false,
+    value: 1000,
+    title: "Test title",
+  }
 
   beforeEach(async () => {
     const { body: { token } } = await request(app)
@@ -27,12 +33,7 @@ describe("Add transaction router tests", () => {
   test("Should return add transaction success", async () => {
     await request(app)
       .post("/api/session/create/transaction")
-      .send({
-        category: "Test category",
-        isDecrement: false,
-        value: 1000,
-        title: "Test title",
-      })
+      .send(transactionData)
       .set('Authorization', `Bearer ${userToken}`)
       .expect(201);
   });
@@ -40,12 +41,7 @@ describe("Add transaction router tests", () => {
   test("Should not return add transaction success with empty user token", async () => {
     await request(app)
       .post("/api/session/create/transaction")
-      .send({
-        category: "Test category",
-        isDecrement: false,
-        value: 1000,
-        title: "Test title",
-      })
+      .send(transactionData)
       .set('Authorization', `Bearer ''`)
       .expect(401);
   });
@@ -59,6 +55,14 @@ describe("Add transaction router tests", () => {
         value: 1000,
         title: "Test title",
       })
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(401);
+  });
+
+  test("Should not return add transaction success with invalid is-decrement value", async () => {
+    await request(app)
+      .post("/api/session/create/transaction")
+      .send({ ...transactionData, isDecrement: null })
       .set('Authorization', `Bearer ${userToken}`)
       .expect(401);
   });
