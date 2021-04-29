@@ -2,9 +2,9 @@ import TransactionRepository from "./index";
 import { cleanColumn } from "../helpers/knex-helpers";
 import { generateId } from "../../../../../utils/generateId";
 
-function generateData(id) {
+function generateData(userId: string) {
   return {
-    userId: id,
+    userId,
     category: "Test category",
     isDecrement: false,
     value: 1000,
@@ -46,5 +46,15 @@ describe("Transaction repository tests", () => {
     const exists = await transactionRepository.existsTransactionByTitle("error");
 
     expect(exists).toBeFalsy();
+  });
+
+  test("Should return true if exists an transaction by id", async () => {
+    const data = generateData(generateId());
+    const id = data.id;
+
+    await transactionRepository.add(data);
+    const exists = await transactionRepository.existsTransactionById(id);
+
+    expect(exists).toBeTruthy();
   });
 });
