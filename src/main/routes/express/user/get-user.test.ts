@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
 
-describe("User routes tests", () => {
+describe("Get user router tests", () => {
   const validData = {
     email: "test@gmail.com",
     password: "123456789",
@@ -21,7 +21,7 @@ describe("User routes tests", () => {
 
   afterEach(async () => {
     await cleanColumn("users");
-  })
+  });
 
   test("Should return login user success", async () => {
     await request(app)

@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
 
-describe("User routes tests", () => {
+describe("Add user router tests", () => {
   const validData = {
     name: "Edmilson",
     email: "test@gmail.com",

@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
 
-describe("Get balance routes tests", () => {
+describe("Get balance router tests", () => {
   let userToken = '';
 
   beforeEach(async () => {
