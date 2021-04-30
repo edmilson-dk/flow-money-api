@@ -99,7 +99,7 @@ class TransactionUseCases implements ITransactionUseCases {
     return right(deletedTransaction);
   }
 
-  async getTransactions(userId: string, page: number): Promise<GetTransactionsResponse> {
+  async getTransactions(userId: string, page = 1): Promise<GetTransactionsResponse> {
     const transactions = await this.transactionRepository.getTransactions(userId, page);
     return transactions;
   }
