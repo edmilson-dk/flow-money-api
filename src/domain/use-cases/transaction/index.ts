@@ -6,5 +6,5 @@ import { TransactionDataDTO } from "../../dtos/transaction";
 export interface ITransactionUseCases {
   add: (data: TransactionDataDTO) => Promise<AddTransactionResponse>;
   dropTransaction: (id: string, userId: string) => Promise<DropTransactionResponse>;
-  //getTransactions: (userId: string) => Promise<GetTransactionsResponse>;
+  getTransactions: (userId: string, page: number) => Promise<GetTransactionsResponse>;
 }
