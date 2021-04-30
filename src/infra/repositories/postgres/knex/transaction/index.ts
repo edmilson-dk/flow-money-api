@@ -18,34 +18,49 @@ class TransactionRepository implements ITransactionRepository {
     return;
   }
 
-  async getTransaction(id: string): Promise<TransactionPersistDTO> {
+  async getTransaction(id: string, userId: string): Promise<TransactionPersistDTO> {
     const row = await db("transactions")
-      .where({ id });
+      .where({ id, user_id: userId });
 
     return TransactionMap.toPersist(row[0]);
   }
 
-  async existsTransactionByTitle(title: string): Promise<boolean> {
+  async existsTransactionByTitle(title: string, userId: string): Promise<boolean> {
     const row = await db("transactions")
-      .where({ title });
+      .where({ title, user_id: userId });
 
     return row.length > 0 ? true : false;
   }
 
-  async existsTransactionById(id: string): Promise<boolean> {
+  async existsTransactionById(id: string, userId: string): Promise<boolean> {
     const row = await db("transactions")
-      .where({ id });
+      .where({ id, user_id: userId });
 
     return row.length > 0 ? true : false;
   }
 
-  async dropTransaction(id: string): Promise<TransactionPersistDTO> {
+  async dropTransaction(id: string, userId: string): Promise<TransactionPersistDTO> {
     const row = await db("transactions")
-      .where({ id })
+      .where({ id, user_id: userId })
       .del()
       .returning("*")
 
     return TransactionMap.toPersist(row[0]);
+  }
+
+  async getTransactions(userId: string, page: number): Promise<TransactionPersistDTO[] | []> {
+    const LIMIT_ITEMS = 25;
+
+    const rows = await db("transactions")
+        .limit(LIMIT_ITEMS)
+        .offset((page -1) * LIMIT_ITEMS)
+        .orderBy('created_at', 'desc')
+        .where({ user_id: userId });
+
+    if (rows.length === 0) return [];
+
+    const result = rows.map(row => TransactionMap.toPersist(row));
+    return result;
   }
 }
 
