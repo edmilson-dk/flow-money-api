@@ -1,3 +1,3 @@
 import { TransactionPersistDTO } from "../../../../domain/dtos/transaction";
 
-export type GetTransactionsResponse = Array<TransactionPersistDTO> | [];
+export type GetTransactionsResponse = TransactionPersistDTO[] | [];
