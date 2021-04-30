@@ -42,11 +42,19 @@ describe("Get all transactions router tests", () => {
       .post("/api/session/create/transaction")
       .send({ ...transactionData, title: "Other title"})
       .set('Authorization', `Bearer ${userToken}`);   
-      
+
     const { body } = await request(app)
       .get("/api/session/transactions")
       .set('Authorization', `Bearer ${userToken}`);
 
     expect(body.length).toBe(2);
+  });
+
+  test("Should return empty data", async () => {
+    const { body } = await request(app)
+      .get("/api/session/transactions")
+      .set('Authorization', `Bearer ${userToken}`);
+
+    expect(body.length).toBe(0);
   });
 });
