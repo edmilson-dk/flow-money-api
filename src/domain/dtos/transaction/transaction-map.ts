@@ -8,7 +8,7 @@ class TransactionMap {
       value: data.value,
       category: data.category,
       title: data.title,
-      isDecrement: data.isDecrement,
+      isDecrement: data.isDecrement ?? data.is_decrement,
       id: data.id,
     };
   }

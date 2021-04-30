@@ -1,5 +1,5 @@
 import { ITransactionRepository } from "../../../../../application/repositories/transaction";
-import { TransactionPersistDTO } from "../../../../../domain/dtos/transaction";
+import { TransactionDTO, TransactionPersistDTO } from "../../../../../domain/dtos/transaction";
 import TransactionMap from "../../../../../domain/dtos/transaction/transaction-map";
 import db from "../../../../../drivers/db/knex/postgres";
 
@@ -48,7 +48,7 @@ class TransactionRepository implements ITransactionRepository {
     return TransactionMap.toPersist(row[0]);
   }
 
-  async getTransactions(userId: string, page = 1): Promise<TransactionPersistDTO[] | []> {
+  async getTransactions(userId: string, page = 1): Promise<TransactionDTO[] | []> {
     const LIMIT_ITEMS = 25;
 
     const rows = await db("transactions")
@@ -59,7 +59,7 @@ class TransactionRepository implements ITransactionRepository {
 
     if (rows.length === 0) return [];
 
-    const result = rows.map(row => TransactionMap.toPersist(row));
+    const result = rows.map(row => TransactionMap.toDTO(row));
     return result;
   }
 }
