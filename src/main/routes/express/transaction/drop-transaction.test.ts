@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../app";
 import { cleanColumn } from "../../../../infra/repositories/postgres/knex/helpers/knex-helpers";
 
-describe("Add transaction router tests", () => {
+describe("Drop transaction router tests", () => {
   let userToken = '';
   let transactionId = '';
 
