@@ -77,4 +77,24 @@ describe("Transaction use cases tests", () => {
       expect(drop.isLeft()).toBeTruthy();
     });   
   });
+
+  describe("Get all transactions tests", () => {
+    test("Should return all transactions data", async () => {
+      const dataOne = generateData(generateId());
+      const dataTwo = { ...dataOne, id: "9990099", title: "Teste other title"};
+
+      await transactionUseCases.add(dataOne);
+      await transactionUseCases.add(dataTwo);
+      const transactions = await transactionUseCases.getTransactions(dataOne.userId);
+
+      expect(transactions.length).toBe(2);
+    });
+
+    test("Should return empty array if not alredy exists transactions", async () => {
+      const dataOne = generateData(generateId());
+      const transactions = await transactionUseCases.getTransactions(dataOne.userId);
+
+      expect(transactions.length).toBe(0);
+    });
+  });
 });
