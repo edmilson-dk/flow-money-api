@@ -75,4 +75,15 @@ describe("Transaction repository tests", () => {
 
     expect(drop).toEqual(data);
   });
+
+  test("Should return all transactions data", async () => {
+    const dataOne = generateData(generateId());
+    const dataTwo = { ...dataOne, id: "9990099", title: "Teste other title"};
+
+    await transactionRepository.add(dataOne);
+    await transactionRepository.add(dataTwo);
+    const transactions = await transactionRepository.getTransactions(dataOne.userId);
+
+    expect(transactions.length).toBe(2);
+  });
 });
