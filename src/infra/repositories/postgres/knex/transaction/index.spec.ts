@@ -86,4 +86,11 @@ describe("Transaction repository tests", () => {
 
     expect(transactions.length).toBe(2);
   });
+
+  test("Should return empty array if not alredy exists transactions", async () => {
+    const dataOne = generateData(generateId());
+    const transactions = await transactionRepository.getTransactions(dataOne.userId);
+
+    expect(transactions.length).toBe(0);
+  });
 });
