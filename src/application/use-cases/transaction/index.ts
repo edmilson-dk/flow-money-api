@@ -12,6 +12,7 @@ import { AlredyExistsTransactionError } from "./errors/alredy-exists-transaction
 import { NotExistsTransactionError } from "./errors/not-exists-transaction";
 import { AddTransactionResponse } from "./responses/add-transaction";
 import { DropTransactionResponse } from "./responses/drop-transaction";
+import { GetTransactionsResponse } from "./responses/get-transactions";
 
 class TransactionUseCases implements ITransactionUseCases {
   private readonly transactionRepository: ITransactionRepository;
@@ -96,6 +97,11 @@ class TransactionUseCases implements ITransactionUseCases {
     }
 
     return right(deletedTransaction);
+  }
+
+  async getTransactions(userId: string, page: number): Promise<GetTransactionsResponse> {
+    const transactions = await this.transactionRepository.getTransactions(userId, page);
+    return transactions;
   }
 }
 
