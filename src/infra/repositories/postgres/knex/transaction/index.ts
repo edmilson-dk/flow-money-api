@@ -48,7 +48,7 @@ class TransactionRepository implements ITransactionRepository {
     return TransactionMap.toPersist(row[0]);
   }
 
-  async getTransactions(userId: string, page: number): Promise<TransactionPersistDTO[] | []> {
+  async getTransactions(userId: string, page = 1): Promise<TransactionPersistDTO[] | []> {
     const LIMIT_ITEMS = 25;
 
     const rows = await db("transactions")
