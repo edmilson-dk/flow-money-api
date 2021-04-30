@@ -45,4 +45,11 @@ describe("Add transaction router tests", () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(200);
   });
+
+  test("Should not delete the transaction with success if transaction id is invalid", async () => {
+    await request(app)
+      .delete(`/api/session/drop/transaction/0393030`)
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(404);
+  });
 });
