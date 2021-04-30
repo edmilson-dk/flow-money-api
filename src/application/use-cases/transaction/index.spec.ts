@@ -68,12 +68,12 @@ describe("Transaction use cases tests", () => {
     });
 
     test("Should delete the transaction with success", async () => {
-      const drop = await transactionUseCases.dropTransaction(transactionId);
+      const drop = await transactionUseCases.dropTransaction(transactionId, data.userId);
       expect(drop.isRight()).toBeTruthy();
     });   
     
     test("Should not delete the transaction with success if id is empty", async () => {
-      const drop = await transactionUseCases.dropTransaction("");
+      const drop = await transactionUseCases.dropTransaction("", data.userId);
       expect(drop.isLeft()).toBeTruthy();
     });   
   });

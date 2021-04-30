@@ -22,9 +22,9 @@ describe("Transaction repository tests", () => {
 
   test("Should add an transaction data in database", async () => {
     const data = generateData(generateId());
-
+ 
     await transactionRepository.add(data);
-    const stored = await transactionRepository.getTransaction(data.id);
+    const stored = await transactionRepository.getTransaction(data.id, data.userId);
     
     expect(stored).toEqual(data);
   });
@@ -34,7 +34,7 @@ describe("Transaction repository tests", () => {
     const title = data.title;
 
     await transactionRepository.add(data);
-    const exists = await transactionRepository.existsTransactionByTitle(title);
+    const exists = await transactionRepository.existsTransactionByTitle(title, data.userId);
 
     expect(exists).toBeTruthy();
   });
@@ -43,7 +43,7 @@ describe("Transaction repository tests", () => {
     const data = generateData(generateId());
 
     await transactionRepository.add(data);
-    const exists = await transactionRepository.existsTransactionByTitle("error");
+    const exists = await transactionRepository.existsTransactionByTitle("error", data.userId);
 
     expect(exists).toBeFalsy();
   });
@@ -53,7 +53,7 @@ describe("Transaction repository tests", () => {
     const id = data.id;
 
     await transactionRepository.add(data);
-    const exists = await transactionRepository.existsTransactionById(id);
+    const exists = await transactionRepository.existsTransactionById(id, data.userId);
 
     expect(exists).toBeTruthy();
   });
@@ -62,7 +62,7 @@ describe("Transaction repository tests", () => {
     const data = generateData(generateId());
 
     await transactionRepository.add(data);
-    const exists = await transactionRepository.existsTransactionById("error");
+    const exists = await transactionRepository.existsTransactionById("error", data.userId);
 
     expect(exists).toBeFalsy();
   });
@@ -71,7 +71,7 @@ describe("Transaction repository tests", () => {
     const data = generateData(generateId());
 
     await transactionRepository.add(data);
-    const drop = await transactionRepository.dropTransaction(data.id);
+    const drop = await transactionRepository.dropTransaction(data.id, data.userId);
 
     expect(drop).toEqual(data);
   });

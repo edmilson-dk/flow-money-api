@@ -14,8 +14,9 @@ export class DropTransactionController implements BaseController {
   async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
     try { 
       const { id } = httpRequest.params;
+      const userId = httpRequest.rest.userId;
 
-      const deletedTransaction: DropTransactionResponse = await this.transactionUseCases.dropTransaction(id);
+      const deletedTransaction: DropTransactionResponse = await this.transactionUseCases.dropTransaction(id, userId);
 
       if (deletedTransaction.isLeft()) {
         return badRequest(deletedTransaction.value, 404);

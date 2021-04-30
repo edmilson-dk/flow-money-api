@@ -34,7 +34,7 @@ class TransactionUseCases implements ITransactionUseCases {
     const balanceData: GetBalanceResponse = await this.balanceUseCases.getBalance(data.userId);
     const isDecrementOrError = TransactionMap.toDecrementBoolean(data.isDecrement);
 
-    if (await this.transactionRepository.existsTransactionByTitle(data.title)) {
+    if (await this.transactionRepository.existsTransactionByTitle(data.title, data.userId)) {
       return left(new AlredyExistsTransactionError(data.title));
     }
 
@@ -69,12 +69,12 @@ class TransactionUseCases implements ITransactionUseCases {
     return right(transactionData);
   }
 
-  async dropTransaction(id: string): Promise<DropTransactionResponse> {
-    if (!(await this.transactionRepository.existsTransactionById(id))) {
+  async dropTransaction(id: string, userId: string): Promise<DropTransactionResponse> {
+    if (!(await this.transactionRepository.existsTransactionById(id, userId))) {
       return left(new NotExistsTransactionError(id));
     }
 
-    const deletedTransaction = await this.transactionRepository.dropTransaction(id);
+    const deletedTransaction = await this.transactionRepository.dropTransaction(id, userId);
     const balanceData = await this.balanceUseCases.getBalance(deletedTransaction.userId);
 
     if (balanceData.isLeft()) {
