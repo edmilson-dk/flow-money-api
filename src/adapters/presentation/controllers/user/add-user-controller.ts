@@ -7,6 +7,9 @@ import { createJWT } from "../../../../infra/jwt-token";
 import UserMap from "../../../../domain/dtos/user/user-map";
 import { BaseController } from "../baseControler";
 
+import { config } from "dotenv";
+config();
+
 export class AddUserController implements BaseController {
   private readonly userUseCases: IUserUseCases;
 
@@ -28,7 +31,7 @@ export class AddUserController implements BaseController {
         return badRequest(addUserResponse.value, 401);
       }
 
-      const token = createJWT(addUserResponse.value.email, addUserResponse.value.id, '3d');
+      const token = createJWT(addUserResponse.value.email, addUserResponse.value.id, process.env.TOKEN_EXPIRES as string);
       const userDTO = UserMap.toDTO({ token, ...addUserResponse.value });
 
       return ok(userDTO, 201);

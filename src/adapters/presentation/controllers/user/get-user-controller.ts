@@ -7,6 +7,9 @@ import UserMap from "../../../../domain/dtos/user/user-map";
 import { BaseController } from "../baseControler";
 import { GetUserResponse } from "../../../../application/use-cases/user/responses/get-user-response";
 
+import { config } from "dotenv";
+config();
+
 export class GetUserController implements BaseController {
   private readonly userUseCases: IUserUseCases;
 
@@ -28,7 +31,7 @@ export class GetUserController implements BaseController {
         return badRequest(getUserResponse.value, 401);
       }
 
-      const token = createJWT(getUserResponse.value.email, getUserResponse.value.id, '1h');
+      const token = createJWT(getUserResponse.value.email, getUserResponse.value.id, process.env.TOKEN_EXPIRES as string);
       const userDTO = UserMap.toDTO({ token, ...getUserResponse.value });
 
       return ok(userDTO, 200);
