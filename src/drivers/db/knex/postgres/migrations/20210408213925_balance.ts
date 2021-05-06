@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
       return knex.schema.createTable('balances', table => {
         table.decimal('joined').notNullable();
         table.decimal('left').notNullable();
-        table.decimal('total').notNullable().unique();
+        table.decimal('total').notNullable();
 
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
@@ -14,6 +14,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('user_id')
           .references('users.id')
           .notNullable()
+          .unique()
           .onDelete('CASCADE');
       });
     }
