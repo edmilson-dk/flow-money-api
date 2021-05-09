@@ -30,4 +30,5 @@ export type TransactionDTO = {
   category: string;
   isDecrement: boolean | string;
   id: string;
+  createdAt: string;
 }

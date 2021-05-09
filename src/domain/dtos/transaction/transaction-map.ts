@@ -10,6 +10,7 @@ class TransactionMap {
       title: data.title,
       isDecrement: data.isDecrement ?? data.is_decrement,
       id: data.id,
+      createdAt: data.created_at ?? data.createdAt
     };
   }
 
