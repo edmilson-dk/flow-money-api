@@ -32,3 +32,8 @@ export type TransactionDTO = {
   id: string;
   createdAt: string;
 }
+
+export type TransactionsDTO = {
+  data: TransactionDTO[];
+  count: number;
+}
