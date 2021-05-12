@@ -1,3 +1,3 @@
-import { TransactionDTO } from "../../../../domain/dtos/transaction";
+import { TransactionsDTO } from "../../../../domain/dtos/transaction";
 
-export type GetTransactionsResponse = TransactionDTO[] | [];
+export type GetTransactionsResponse = TransactionsDTO | [];
