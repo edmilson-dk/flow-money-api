@@ -1,4 +1,5 @@
 import TransactionUseCases from "./index";
+import { TransactionsDTO } from "../../../domain/dtos/transaction";
 import TransactionRepository from "../../../infra/repositories/postgres/knex/transaction/";
 import BalanceRepository from "../../../infra/repositories/postgres/knex/balance/";
 import BalanceUseCases from "../balance";
@@ -86,15 +87,15 @@ describe("Transaction use cases tests", () => {
       await transactionUseCases.add(dataOne);
       await transactionUseCases.add(dataTwo);
       const transactions = await transactionUseCases.getTransactions(dataOne.userId);
-
-      expect(transactions.length).toBe(2);
+    
+      expect(Array.isArray(transactions)).toBeFalsy();
     });
 
     test("Should return empty array if not alredy exists transactions", async () => {
       const dataOne = generateData(generateId());
       const transactions = await transactionUseCases.getTransactions(dataOne.userId);
 
-      expect(transactions.length).toBe(0);
+      expect(Array.isArray(transactions)).toBeTruthy();
     });
   });
 });
