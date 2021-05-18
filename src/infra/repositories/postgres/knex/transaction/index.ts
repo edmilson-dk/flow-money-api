@@ -63,7 +63,7 @@ class TransactionRepository implements ITransactionRepository {
 
     if (titleOrCategory !== "") {
       query
-        .where({ title: titleOrCategory })
+        .andWhere({ title: titleOrCategory })
         .orWhere({ category: titleOrCategory });
     }
 
