@@ -1,5 +1,5 @@
 import BalanceMap from "../../../domain/dtos/balance/balance-map";
-import { TransactionDataDTO } from "../../../domain/dtos/transaction";
+import { TransactionDataDTO, TransactionsDTO } from "../../../domain/dtos/transaction";
 import TransactionMap from "../../../domain/dtos/transaction/transaction-map";
 import Transaction from "../../../domain/entities/Transaction";
 import { IBalanceUseCases } from "../../../domain/use-cases/balance";
@@ -99,8 +99,8 @@ class TransactionUseCases implements ITransactionUseCases {
     return right(deletedTransaction);
   }
 
-  async getTransactions(userId: string, page = 1, limit = 10): Promise<GetTransactionsResponse> {
-    const transactions = await this.transactionRepository.getTransactions(userId, page, limit);
+  async getTransactions(userId: string, page = 1, limit = 10, titleOrCategory = ""): Promise<TransactionsDTO | []> {
+    const transactions = await this.transactionRepository.getTransactions(userId, page, limit, titleOrCategory);
     return transactions;
   }
 }

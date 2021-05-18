@@ -6,5 +6,5 @@ export interface ITransactionRepository {
   existsTransactionById: (id: string, userId: string) => Promise<boolean>;
   getTransaction: (id: string, userId: string) => Promise<TransactionPersistDTO>;
   dropTransaction: (id: string, userId: string) => Promise<TransactionPersistDTO>;
-  getTransactions: (userId: string, page: number, limit: number) => Promise<TransactionsDTO | []>;
+  getTransactions: (userId: string, page: number, limit: number, titleOrCategory: string) => Promise<TransactionsDTO | []>;
 }

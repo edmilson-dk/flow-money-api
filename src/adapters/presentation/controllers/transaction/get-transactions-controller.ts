@@ -13,10 +13,10 @@ export class GetTransactionsController implements BaseController {
 
   async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
     try { 
-      const { page, limit } = httpRequest.query;
+      const { page, limit, title_category } = httpRequest.query;
       const userId = httpRequest.rest.userId;
 
-      const transactions: GetTransactionsResponse = await this.transactionUseCases.getTransactions(userId, page, limit);
+      const transactions: GetTransactionsResponse = await this.transactionUseCases.getTransactions(userId, page, limit, title_category);
 
       return ok(transactions, 200);
     } catch (err) {

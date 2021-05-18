@@ -48,19 +48,27 @@ class TransactionRepository implements ITransactionRepository {
     return TransactionMap.toPersist(row[0]);
   }
 
-  async getTransactions(userId: string, page = 1, limit = 10): Promise<TransactionsDTO | []> {
+  async getTransactions(userId: string, page = 1, limit = 10, titleOrCategory = ""): Promise<TransactionsDTO | []> {
     const LIMIT_ITEMS = limit;
 
     const [{ count }] = await db("transactions")
       .where({ user_id: userId })
       .count();
 
-    const rows = await db("transactions")
+    let query = db("transactions")
         .limit(LIMIT_ITEMS)
         .offset((page -1) * LIMIT_ITEMS)
         .orderBy('created_at', 'desc')
         .where({ user_id: userId });
 
+    if (titleOrCategory !== "") {
+      query
+        .where({ title: titleOrCategory })
+        .orWhere({ category: titleOrCategory });
+    }
+
+    const rows = await query;
+    
     if (rows.length === 0) return [];
 
     const result = rows.map(row => TransactionMap.toDTO(row));
