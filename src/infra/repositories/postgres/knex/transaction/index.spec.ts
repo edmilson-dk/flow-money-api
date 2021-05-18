@@ -84,13 +84,13 @@ describe("Transaction repository tests", () => {
     await transactionRepository.add(dataTwo);
     const transactions = await transactionRepository.getTransactions(dataOne.userId);
 
-    expect(transactions.length).toBe(2);
+    expect(Array.isArray(transactions)).toBeFalsy();
   });
 
   test("Should return empty array if not alredy exists transactions", async () => {
     const dataOne = generateData(generateId());
     const transactions = await transactionRepository.getTransactions(dataOne.userId);
 
-    expect(transactions.length).toBe(0);
+    expect(Array.isArray(transactions)).toBeTruthy();
   });
 });
